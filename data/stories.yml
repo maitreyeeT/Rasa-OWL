@@ -1,0 +1,44 @@
+version: "3.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_askWellbeing
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_askWellbeing
+  - intent: mood_unhappy
+  - action: utter_seekInfoNotWell
+  - intent: provideInfo_Notwell
+  - action: action_ManageWellbeing
+  - intent: affirm
+  - action: utter_confirm
+  - action: utter_whyNotSleep
+  - intent: provide_WhyNotSleep
+  - checkpoint: talk about pain
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_askWellbeing
+  - intent: mood_unhappy
+  - action: utter_seekInfoNotWell
+  - intent: deny_and_breakfast
+  - checkpoint: breakfast
+
+
+- story: talk about breakfast
+  steps:
+  - checkpoint: breakfast
+  - action: action_ManageWellbeing
+  - intent: food_Type
+  - action: utter_confirm
